@@ -28,7 +28,7 @@ public class TweetGenForSingleGame {
 		// Resources
 		String corpusFilePath = "data/Sample_Data.xml";
 		String fifaCodesFilePath = "data/FifaCodes";
-		String geolocationsFilePath = "data/FifaCodes";
+		String geolocationsFilePath = "data/Geolocations";
 
 		// corpusFilePath = "data/Liveticker_combined.xml";
 

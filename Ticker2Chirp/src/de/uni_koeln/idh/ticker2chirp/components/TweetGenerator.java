@@ -71,7 +71,13 @@ public class TweetGenerator {
 				for (int i = 0; i < posts.size(); i++) {
 					TweetData td = new TweetData();
 					td.setDate(kickoffTime.getDayOfMonth() + "." + kickoffTime.getMonthValue() + "." + kickoffTime.getYear());
-					td.setText(posts.get(i) + " " + footballGame.getHashtag());
+					String text = posts.get(i);
+					if(text.length()>270) {
+						td.setText(text.substring(0, text.indexOf('\'')+2) + footballGame.getHashtag() + text.substring(text.indexOf('\'')+1));
+					}
+					else {
+						td.setText(text + " " + footballGame.getHashtag());
+					}
 					if (minute == 0) {
 						int backwards = posts.size()- i;
 						postTime = kickoffTime.minusMinutes(backwards);

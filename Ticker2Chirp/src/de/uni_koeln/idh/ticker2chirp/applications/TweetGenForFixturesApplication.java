@@ -28,7 +28,7 @@ public class TweetGenForFixturesApplication {
 		String corpusFilePath = "data/Sample_Data.xml";
 		String fixturesTableFilePath = "data/SpielplanWM18.csv";
 		String fifaCodesFilePath = "data/FifaCodes"; 
-		String geolocationsFilePath = "data/FifaCodes"; 
+		String geolocationsFilePath = "data/Geolocations"; 
 			
 		//corpusFilePath = "data/Liveticker_combined.xml";
 		
