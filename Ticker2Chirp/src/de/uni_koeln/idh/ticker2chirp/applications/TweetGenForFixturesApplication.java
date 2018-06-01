@@ -24,26 +24,34 @@ public class TweetGenForFixturesApplication {
 
 	public static void main(String[] args) {
 		
-		//String corpus = "data/Liveticker_combined.xml";
-		String corpus = "data/Sample_Data.xml";
-		FifaCodes codes = new FifaCodes("data/FifaCodes");
-		XMLTickerReader reader = new XMLTickerReader(codes, "ticker");
-		reader.processFile("data/Liveticker_Autochirp.xml", false);
-		Map<String, List<FootballMatch>> processFile = reader.processFile(corpus, false);	
+		//Resources
+		String corpusFilePath = "data/Sample_Data.xml";
+		String fixturesTableFilePath = "data/SpielplanWM18.csv";
+		String fifaCodesFilePath = "data/FifaCodes"; 
+		String geolocationsFilePath = "data/FifaCodes"; 
+			
+		//corpusFilePath = "data/Liveticker_combined.xml";
 		
+		FifaCodes codes = new FifaCodes(fifaCodesFilePath);
+		XMLTickerReader reader = new XMLTickerReader(codes, "ticker");
+		Map<String, List<FootballMatch>> processFile = reader.processFile(corpusFilePath, false);	
+		File outputFolder = new File("tweets");
+		if(!outputFolder.exists()) {
+			outputFolder.mkdirs();
+		}
 		
 		TweetGenerator tg = new TweetGenerator(processFile);
-		tg.setGeolocations(new Geolocation("data/geolocations"));
+		tg.setGeolocations(new Geolocation(geolocationsFilePath));
 		
-		List<FootballMatch> collectFixtures = CSVFixtureReader.collectFixtures("data/SpielplanWM18.csv", new FifaCodes("data/FifaCodes"));
-		for (FootballMatch footballGame : collectFixtures) {
-			List<TweetData> generateTweets = tg.generateTweets(footballGame);
+		List<FootballMatch> collectFixtures = CSVFixtureReader.collectFixtures(fixturesTableFilePath, codes);
+		for (FootballMatch footballMatch : collectFixtures) {
+			List<TweetData> generateTweets = tg.generateTweets(footballMatch);
 			
 			if(generateTweets!=null) {
 				try {
 					PrintWriter out = new PrintWriter(
-							new FileWriter(new File("tweets/" + footballGame.getHashtag() + ".tsv")));
-					System.out.println(footballGame.getHashtag() + " " + footballGame.getKickoff());
+							new FileWriter(new File(outputFolder + "/" + footballMatch.getHashtag() + ".tsv")));
+					System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
 					for (TweetData tweetData : generateTweets) {
 						out.println(tweetData);
 					} 
