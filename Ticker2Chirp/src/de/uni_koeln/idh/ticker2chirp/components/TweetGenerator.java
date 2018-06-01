@@ -105,7 +105,7 @@ public class TweetGenerator {
 				}
 			}
 			TweetData end = new TweetData();
-			end.setText("********************* END OF GAME *********************");
+			end.setText("********************* END OF MATCH *********************");
 			tweets.add(end);
 		}
 		return tweets;
