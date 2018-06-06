@@ -51,7 +51,7 @@ public class TweetGenForFixturesApplication {
 				try {
 					PrintWriter out = new PrintWriter(
 							new FileWriter(new File(outputFolder + "/" + footballMatch.getHashtag() + ".tsv")));
-					System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
+					System.out.println(footballMatch.getHashtag() + "  \t" + footballMatch.getDate() + " \t" +footballMatch.getKickoff());
 					for (TweetData tweetData : generateTweets) {
 						out.println(tweetData);
 					} 
