@@ -11,6 +11,10 @@ import java.util.TreeMap;
  * @author jhermes
  *
  */
+/**
+ * @author jhermes
+ *
+ */
 public class FootballMatch {
 	
 	private String url;
@@ -125,6 +129,10 @@ public class FootballMatch {
 
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	

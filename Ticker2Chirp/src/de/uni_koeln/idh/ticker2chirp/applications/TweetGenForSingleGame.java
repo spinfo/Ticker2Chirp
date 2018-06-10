@@ -10,6 +10,7 @@ import java.util.Map;
 import de.uni_koeln.idh.ticker2chirp.components.CSVFixtureReader;
 import de.uni_koeln.idh.ticker2chirp.components.TweetGenerator;
 import de.uni_koeln.idh.ticker2chirp.components.XMLTickerReader;
+import de.uni_koeln.idh.ticker2chirp.data.AutoChirpTable;
 import de.uni_koeln.idh.ticker2chirp.data.FifaCodes;
 import de.uni_koeln.idh.ticker2chirp.data.FootballMatch;
 import de.uni_koeln.idh.ticker2chirp.data.Geolocation;
@@ -46,20 +47,22 @@ public class TweetGenForSingleGame {
 		FootballMatch footballMatch = new FootballMatch(null, null, "Österreich", "Deutschland", "02.06.18", "18:00:00",
 				codes);
 		footballMatch.setLocation("Klagenfurt");
-		List<TweetData> generateTweets = tg.generateTweets(footballMatch);
+		List<AutoChirpTable> generatesTables = tg.generateTweets(footballMatch);
 
-		if (generateTweets != null) {
+		if (generatesTables != null) {
+			for (AutoChirpTable autoChirpTable : generatesTables) {
 			try {
 				PrintWriter out = new PrintWriter(
-						new FileWriter(new File("tweets/" + footballMatch.getHashtag() + ".tsv")));
+						new FileWriter(new File("tweets/" + autoChirpTable.getHashTag()+ autoChirpTable.getDescription() + ".tsv")));
 				System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
-				for (TweetData tweetData : generateTweets) {
+				for (TweetData tweetData : autoChirpTable.getTweets()) {
 					out.println(tweetData);
 				}
 				out.flush();
 				out.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
 			}
 		}
 

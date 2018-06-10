@@ -10,6 +10,7 @@ import java.util.Map;
 import de.uni_koeln.idh.ticker2chirp.components.CSVFixtureReader;
 import de.uni_koeln.idh.ticker2chirp.components.TweetGenerator;
 import de.uni_koeln.idh.ticker2chirp.components.XMLTickerReader;
+import de.uni_koeln.idh.ticker2chirp.data.AutoChirpTable;
 import de.uni_koeln.idh.ticker2chirp.data.FifaCodes;
 import de.uni_koeln.idh.ticker2chirp.data.FootballMatch;
 import de.uni_koeln.idh.ticker2chirp.data.Geolocation;
@@ -45,20 +46,23 @@ public class TweetGenForFixturesApplication {
 		
 		List<FootballMatch> collectFixtures = CSVFixtureReader.collectFixtures(fixturesTableFilePath, codes);
 		for (FootballMatch footballMatch : collectFixtures) {
-			List<TweetData> generateTweets = tg.generateTweets(footballMatch);
-			
-			if(generateTweets!=null) {
+			List<AutoChirpTable> generatesTables = tg.generateTweets(footballMatch);
+
+			if (generatesTables != null) {
+				for (AutoChirpTable autoChirpTable : generatesTables) {
 				try {
 					PrintWriter out = new PrintWriter(
-							new FileWriter(new File(outputFolder + "/" + footballMatch.getHashtag() + ".tsv")));
-					System.out.println(footballMatch.getHashtag() + "  \t" + footballMatch.getDate() + " \t" +footballMatch.getKickoff());
-					for (TweetData tweetData : generateTweets) {
+							new FileWriter(new File("tweets/" + autoChirpTable.getHashTag()+ " " +autoChirpTable.getDescription() + ".tsv")));
+					System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
+					for (TweetData tweetData : autoChirpTable.getTweets()) {
 						out.println(tweetData);
-					} 
+					}
 					out.flush();
 					out.close();
 				} catch (IOException e) {
-					e.printStackTrace();				}
+					e.printStackTrace();
+				}
+				}
 			}
 			
 		}
