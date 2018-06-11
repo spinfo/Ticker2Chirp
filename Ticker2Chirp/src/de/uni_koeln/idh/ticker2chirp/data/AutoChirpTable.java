@@ -3,7 +3,12 @@ package de.uni_koeln.idh.ticker2chirp.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoChirpTable {
+/**
+ * Class representing an autoChirp Group.
+ * @author jhermes
+ *
+ */
+public class AutoChirpTable{
 	
 	private String hashTag;
 	
