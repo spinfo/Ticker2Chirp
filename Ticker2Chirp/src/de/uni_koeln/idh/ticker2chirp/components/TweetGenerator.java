@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 
+import de.uni_koeln.idh.ticker2chirp.data.AutoChirpTable;
 import de.uni_koeln.idh.ticker2chirp.data.FootballMatch;
 import de.uni_koeln.idh.ticker2chirp.data.Geolocation;
 import de.uni_koeln.idh.ticker2chirp.data.TweetData;
@@ -47,8 +48,8 @@ public class TweetGenerator {
 	 * @param footballGame
 	 * @return
 	 */
-	public List<TweetData> generateTweets(FootballMatch footballGame) {
-		List<TweetData> tweets = new ArrayList<TweetData>();
+	public List<AutoChirpTable> generateTweets(FootballMatch footballGame) {
+		List<AutoChirpTable> tables = new ArrayList<AutoChirpTable>();
 		String date = footballGame.getDate();
 		String kickoff = footballGame.getKickoff();
 
@@ -62,6 +63,7 @@ public class TweetGenerator {
 			SortedMap<Integer, List<String>> messages = game.getMessages();
 			Set<Integer> keySet = messages.keySet();
 			LocalDateTime postTime;
+			AutoChirpTable table = new AutoChirpTable(footballGame.getHashtag(), game.getTitle());
 			for (Integer minute : keySet) {
 				postTime = kickoffTime.plusMinutes(minute-1);
 				if(minute>45) {
@@ -105,16 +107,13 @@ public class TweetGenerator {
 							td.setLongitude(geolocations.getLongitude(location));
 						}
 					}
-					
-					
-					tweets.add(td);
+					table.addTweet(td);
 				}
 			}
 			TweetData end = new TweetData();
-			end.setText("********************* END OF MATCH *********************");
-			tweets.add(end);
+			tables.add(table);
 		}
-		return tweets;
+		return tables;
 	}
 
 	/**
