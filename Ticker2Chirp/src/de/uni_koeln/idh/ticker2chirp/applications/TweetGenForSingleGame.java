@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import de.uni_koeln.idh.ticker2chirp.components.CSVFixtureReader;
 import de.uni_koeln.idh.ticker2chirp.components.TweetGenerator;
 import de.uni_koeln.idh.ticker2chirp.components.XMLTickerReader;
 import de.uni_koeln.idh.ticker2chirp.data.AutoChirpTable;

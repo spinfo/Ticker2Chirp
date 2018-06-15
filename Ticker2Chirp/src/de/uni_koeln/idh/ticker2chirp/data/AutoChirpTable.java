@@ -19,7 +19,7 @@ public class AutoChirpTable{
 	public AutoChirpTable(String hashTag, String description) {
 		super();
 		this.hashTag = hashTag;
-		this.description = description.substring(0, description.indexOf("M 20")+6) + ")";
+		this.description = description.substring(12, description.indexOf("M 20")+6).replaceAll(":", "-") + ")";
 		this.tweets = new ArrayList<TweetData>();
 	}
 
@@ -37,6 +37,10 @@ public class AutoChirpTable{
 
 	public String getDescription() {
 		return description;
+	}
+	
+	public int getNumberOfTweets() {
+		return tweets.size();
 	}
 	
 }
