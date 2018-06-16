@@ -86,9 +86,9 @@ public class TweetGenerator {
 
 					} else {
 						if (minute == 120) {
-							postTime = postTime.plusSeconds(i*20);	
+							postTime = postTime.plusSeconds(30);	
 						} else {
-							postTime = postTime.plusSeconds(i*10);
+							postTime = postTime.plusSeconds(10);
 						}
 					}
 					String hour = postTime.getHour()+"";
