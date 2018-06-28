@@ -27,7 +27,7 @@ public class TweetGenForFixturesApplication {
 		
 		//Resources
 		String corpusFilePath = "data/Sample_Data.xml";
-		String fixturesTableFilePath = "data/SpielplanWM18.csv";
+		String fixturesTableFilePath = "data/AchtelfinaleWM18.csv";
 		String fifaCodesFilePath = "data/FifaCodes"; 
 		String geolocationsFilePath = "data/Geolocations"; 
 			
@@ -52,7 +52,7 @@ public class TweetGenForFixturesApplication {
 				for (AutoChirpTable autoChirpTable : generatesTables) {
 				try {
 					PrintWriter out = new PrintWriter(
-							new FileWriter(new File("tweets/" + autoChirpTable.getHashTag()+ " " +autoChirpTable.getDescription() + ".tsv")));
+							new FileWriter(new File("tweetsAF/" + autoChirpTable.getHashTag()+ " " +autoChirpTable.getDescription() + ".tsv")));
 					System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
 					for (TweetData tweetData : autoChirpTable.getTweets()) {
 						out.println(tweetData);
