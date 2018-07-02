@@ -30,7 +30,7 @@ public class TweetGenForSingleGame {
 		String fifaCodesFilePath = "data/FifaCodes";
 		String geolocationsFilePath = "data/Geolocations";
 
-		// corpusFilePath = "data/Liveticker_combined.xml";
+		//corpusFilePath = "data/Liveticker_combined.xml";
 
 		FifaCodes codes = new FifaCodes(fifaCodesFilePath);
 		XMLTickerReader reader = new XMLTickerReader(codes, "ticker");
@@ -43,16 +43,17 @@ public class TweetGenForSingleGame {
 		TweetGenerator tg = new TweetGenerator(processFile);
 		tg.setGeolocations(new Geolocation(geolocationsFilePath));
 
-		FootballMatch footballMatch = new FootballMatch(null, null, "Österreich", "Deutschland", "02.06.18", "18:00:00",
+		FootballMatch footballMatch = new FootballMatch(null, null, "Deutschland", "Brasilien", "30.06.18", "13:00:00",
 				codes);
-		footballMatch.setLocation("Klagenfurt");
+		//footballMatch.setHashtag("#GERITA");
+		footballMatch.setLocation("Yokohama");
 		List<AutoChirpTable> generatesTables = tg.generateTweets(footballMatch);
 
 		if (generatesTables != null) {
 			for (AutoChirpTable autoChirpTable : generatesTables) {
 			try {
 				PrintWriter out = new PrintWriter(
-						new FileWriter(new File("tweets/" + autoChirpTable.getHashTag()+ autoChirpTable.getDescription() + ".tsv")));
+						new FileWriter(new File("tweetsAF/" + autoChirpTable.getHashTag()+ autoChirpTable.getDescription() + ".tsv")));
 				System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
 				for (TweetData tweetData : autoChirpTable.getTweets()) {
 					out.println(tweetData);
