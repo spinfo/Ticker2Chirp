@@ -16,10 +16,10 @@ public class TestCorpus {
 
 	@Test
 	public void testCorpus() {
-		String 	corpusFilePath = "data/Liveticker_combined.xml";
-		String fixturesTableFilePath = "data/SpielplanWM18.csv";
+		String 	corpusFilePath = "data/buli0607.xml";
+
 		String fifaCodesFilePath = "data/FifaCodes"; 
-		String geolocationsFilePath = "data/Geolocations"; 
+	
 		FifaCodes codes = new FifaCodes(fifaCodesFilePath);
 		XMLTickerReader reader = new XMLTickerReader(codes, "ticker");
 		Map<String, List<FootballMatch>> result = reader.processFile(corpusFilePath, false);	

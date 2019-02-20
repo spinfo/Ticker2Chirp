@@ -53,7 +53,7 @@ public class TweetGenForSingleGame {
 			for (AutoChirpTable autoChirpTable : generatesTables) {
 			try {
 				PrintWriter out = new PrintWriter(
-						new FileWriter(new File("tweetsAnn/" + autoChirpTable.getHashTag()+ autoChirpTable.getDescription() + ".tsv")));
+						new FileWriter(new File("tweetsTest/" + autoChirpTable.getHashTag()+ autoChirpTable.getDescription() + ".tsv")));
 				System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
 				for (TweetData tweetData : autoChirpTable.getTweets()) {
 					out.println(tweetData);
