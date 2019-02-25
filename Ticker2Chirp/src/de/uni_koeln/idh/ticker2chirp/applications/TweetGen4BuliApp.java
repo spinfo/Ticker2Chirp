@@ -30,7 +30,19 @@ public class TweetGen4BuliApp {
 		String fixturesTableFilePath = "data/SpielplanBL25.csv";
 		String fifaCodesFilePath = "data/BuliCodes"; 
 		String geolocationsFilePath = "data/Geolocations"; 
-			
+		String outputFolderName = "tweetsBuli";
+		
+		if(args.length==3) {
+			corpusFilePath = args[0];
+			fixturesTableFilePath = args[1];
+			outputFolderName= args[2];
+		}
+		File outputFolder = new File(outputFolderName);
+		if(!outputFolder.exists()) {
+			outputFolder.mkdirs();
+		}
+		
+		
 		String[] split = corpusFilePath.split("/");
 		String[] split2 = split[split.length-1].split("\\.");
 		String fileNameSuffix = split2[0];
@@ -52,7 +64,7 @@ public class TweetGen4BuliApp {
 				for (AutoChirpTable autoChirpTable : generatesTables) {
 				try {
 					PrintWriter out = new PrintWriter(
-							new FileWriter(new File("tweetsBuli/" + autoChirpTable.getHashTag()+ "_" + fileNameSuffix + ".tsv")));
+							new FileWriter(new File(outputFolderName + "/" + autoChirpTable.getHashTag()+ "_" + fileNameSuffix + ".tsv")));
 					System.out.println(footballMatch.getHashtag() + " " + footballMatch.getKickoff());
 					for (TweetData tweetData : autoChirpTable.getTweets()) {
 						out.println(tweetData);
